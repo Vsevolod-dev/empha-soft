@@ -1,0 +1,27 @@
+//@import 'fonts';
+//@import 'variables';
+//@import 'libs/normalize';
+@import '~antd/dist/antd.css';
+
+.h100 {
+    height: calc(100vh - 64px);
+}
+//
+//@import 'components/all';
+//
+//body {
+//    background-color: $background;
+//}
+//
+//.wrapper {
+//    width: calc(100vw - 100px);
+//    height: 100%;
+//    background-color: #fff;
+//    margin: 50px auto;
+//    border-radius: 10px;
+//    max-width: 1400px;
+//    @media (max-width: 440px) {
+//        width: calc(100vw - 50px);
+//        margin: 25px auto;
+//    }
+//}

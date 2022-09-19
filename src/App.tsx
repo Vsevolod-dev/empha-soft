@@ -1,20 +1,23 @@
 import './scss/app.scss';
-import Header from "./components/Header";
-import Login from "./pages/Login";
-import UserList from "./pages/UserList";
-import {Route, Routes} from "react-router-dom";
+import Navbar from "./components/Navbar";
+import {ReactElement} from "react";
+import AppRouter from "./components/AppRouter";
+import {Layout} from "antd";
+import {useActions} from "./hoooks/useActions";
+import {useCookies} from "react-cookie";
 
-function App() {
+function App(): ReactElement {
+    const { setToken } = useActions()
+    const [cookies] = useCookies(['token'])
+    if (cookies.token !== '') setToken(cookies.token)
+
     return (
-        <div className="App">
-            <div className="wrapper">
-                <Header/>
-                <Routes>
-                    <Route path={'/'} element={<UserList/>}/>
-                    <Route path={'/login'} element={<Login/>}/>
-                </Routes>
-            </div>
-        </div>
+        <Layout>
+            <Navbar/>
+            <Layout.Content style={{padding: 10}}>
+                <AppRouter/>
+            </Layout.Content>
+        </Layout>
     );
 }
 

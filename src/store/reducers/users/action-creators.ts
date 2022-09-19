@@ -1,34 +1,33 @@
 import {
-    AuthActionEnum,
+    UsersActionEnum,
     SetErrorAction,
     SetIsLoadingAction,
-    SetTokenAction,
+    SetUsersAction,
 } from "./types";
 import {AppDispatch} from "../../index";
 import axios from "axios";
+import {IUser} from "../../../models/IUser";
 
-export const AuthActionCreators = {
-    setError: (error: string): SetErrorAction => ({type: AuthActionEnum.SET_ERROR, payload: error}),
-    setIsLoading: (isLoading: boolean): SetIsLoadingAction => ({type: AuthActionEnum.SET_IS_LOADING, payload: isLoading}),
-    setToken: (token: string): SetTokenAction => ({type: AuthActionEnum.SET_TOKEN, payload: token}),
-    login: (username: string, password: string) => async (dispatch: AppDispatch) => {
+export const UserActionCreators = {
+    setError: (error: string): SetErrorAction => ({type: UsersActionEnum.SET_ERROR, payload: error}),
+    setIsLoading: (isLoading: boolean): SetIsLoadingAction => ({type: UsersActionEnum.SET_IS_LOADING, payload: isLoading}),
+    setUsers: (users: IUser[]): SetUsersAction => ({type: UsersActionEnum.SET_USERS, payload: users}),
+    getUsers: (token: string) => async (dispatch: AppDispatch) => {
         try {
-            dispatch(AuthActionCreators.setIsLoading(true))
-            const res = await axios.post('http://emphasoft-test-assignment.herokuapp.com/api-token-auth/', {
-                username,
-                password
+            dispatch(UserActionCreators.setIsLoading(true))
+            const res = await axios.get('http://emphasoft-test-assignment.herokuapp.com/api/v1/users', {
+                headers: {
+                    'Authorization': `Token ${token}`
+                }
             })
-            if (res.data.token) {
-                dispatch(AuthActionCreators.setToken(res.data.token))
+            if (res.data) {
+                dispatch(UserActionCreators.setUsers(res.data))
             } else {
-                dispatch(AuthActionCreators.setError('Incorrect Username or Password'))
+                dispatch(UserActionCreators.setError('Incorrect Username or Password'))
             }
-            dispatch(AuthActionCreators.setIsLoading(false))
+            dispatch(UserActionCreators.setIsLoading(false))
         } catch (e) {
-            dispatch(AuthActionCreators.setError('An error has occurred'))
+            dispatch(UserActionCreators.setError('An error has occurred'))
         }
-    },
-    logout: () => async (dispatch: AppDispatch) => {
-        dispatch(AuthActionCreators.setToken(''))
-    },
+    }
 }

@@ -1,13 +1,43 @@
+import {Menu, Row} from 'antd';
+import {Header} from 'antd/lib/layout/layout';
 import React, {FC} from 'react';
+import {useNavigate} from "react-router-dom";
+import {useTypedSelector} from "../hoooks/useTypedSelector";
+import {useDispatch} from "react-redux";
+import {AuthActionCreators} from "../store/reducers/auth/action-creators";
+import {useActions} from "../hoooks/useActions";
 
-const Header:FC = () => {
+const Navbar: FC = () => {
+    const {token} = useTypedSelector(state => state.auth)
+    const navigate = useNavigate()
+    const { logout } = useActions()
+
+    const publicItems = [
+        {
+            label: 'Login', key: 'login', onClick: () => {
+                navigate('/login')
+            }
+        }
+    ];
+
+    const privateItems = [
+        {
+            label: 'Log out', key: 'logout', onClick: () => {
+                logout()
+            }
+        }
+    ];
+
     return (
-        <header className={'header'}>
-            <div className="container">
-                <h1>User list</h1>
-            </div>
-        </header>
+        <Header>
+            <Row justify={'end'}>
+                {token !== ''
+                    ? <Menu theme={"light"} mode="horizontal" items={privateItems} selectable={false}/>
+                    : <Menu theme={"light"} mode="horizontal" items={publicItems} selectable={false}/>
+                }
+            </Row>
+        </Header>
     );
 };
 
-export default Header;
+export default Navbar;

@@ -1,31 +1,33 @@
-export interface AuthState {
+import {IUser} from "../../../models/IUser";
+
+export interface UsersState {
     isLoading: boolean
     error: string,
-    token: string
+    users: IUser[]
 }
 
-export enum AuthActionEnum {
+export enum UsersActionEnum {
     SET_ERROR = "SET_ERROR",
     SET_IS_LOADING = "SET_IS_LOADING",
-    SET_TOKEN = "SET_TOKEN"
+    SET_USERS = "SET_USERS"
 }
 
-export interface SetTokenAction {
-    type:  AuthActionEnum.SET_TOKEN
-    payload: string
+export interface SetUsersAction {
+    type:  UsersActionEnum.SET_USERS
+    payload: IUser[]
 }
 
 export interface SetErrorAction {
-    type:  AuthActionEnum.SET_ERROR
+    type:  UsersActionEnum.SET_ERROR
     payload: string
 }
 
 export interface SetIsLoadingAction {
-    type:  AuthActionEnum.SET_IS_LOADING
+    type:  UsersActionEnum.SET_IS_LOADING
     payload: boolean
 }
 
-export type AuthAction =
+export type UsersAction =
     SetErrorAction |
     SetIsLoadingAction |
-    SetTokenAction
+    SetUsersAction
