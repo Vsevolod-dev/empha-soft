@@ -8,8 +8,8 @@ const LoginForm: FC = () => {
     const { login } = useActions()
     const {error, isLoading} = useTypedSelector(state => state.auth)
 
-    const [username, setUsername] = useState(''); // test_super
-    const [password, setPassword] = useState(''); // Nf<U4f<rDbtDxAPn
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
     const submit = () => {
         login(username, password)

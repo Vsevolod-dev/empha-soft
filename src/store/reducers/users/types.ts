@@ -1,4 +1,4 @@
-import {IUser} from "../../../models/IUser";
+import {IUser} from "../../../@types/IUser";
 
 export interface UsersState {
     isLoading: boolean
@@ -9,7 +9,8 @@ export interface UsersState {
 export enum UsersActionEnum {
     SET_ERROR = "SET_ERROR",
     SET_IS_LOADING = "SET_IS_LOADING",
-    SET_USERS = "SET_USERS"
+    SET_USERS = "SET_USERS",
+    ADD_USER = "ADD_USER"
 }
 
 export interface SetUsersAction {
@@ -27,7 +28,13 @@ export interface SetIsLoadingAction {
     payload: boolean
 }
 
+export interface AddUserAction {
+    type:  UsersActionEnum.ADD_USER
+    payload: IUser
+}
+
 export type UsersAction =
     SetErrorAction |
     SetIsLoadingAction |
-    SetUsersAction
+    SetUsersAction |
+    AddUserAction

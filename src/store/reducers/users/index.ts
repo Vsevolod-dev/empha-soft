@@ -14,6 +14,8 @@ export default function authReducer(state = initialState, action: UsersAction): 
             return {...state, isLoading: action.payload}
         case UsersActionEnum.SET_USERS:
             return {...state, users: action.payload}
+        case UsersActionEnum.ADD_USER:
+            return {...state, users: [...state.users, action.payload]}
         default:
             return state
     }
