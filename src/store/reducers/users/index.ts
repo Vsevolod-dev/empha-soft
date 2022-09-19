@@ -16,6 +16,8 @@ export default function authReducer(state = initialState, action: UsersAction): 
             return {...state, users: action.payload}
         case UsersActionEnum.ADD_USER:
             return {...state, users: [...state.users, action.payload]}
+        case UsersActionEnum.REMOVE_USER:
+            return {...state, users: state.users.filter(user => user.id !== action.payload)}
         default:
             return state
     }

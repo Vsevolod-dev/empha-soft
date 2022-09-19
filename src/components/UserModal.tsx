@@ -1,24 +1,50 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {Button, Form, Input, Modal, Switch} from "antd";
 import {rules} from "../utils/rules";
 import {useActions} from "../hoooks/useActions";
 import {useTypedSelector} from "../hoooks/useTypedSelector";
+import {IUser} from "../@types/IUser";
 
-type NewUserProps = {
+type UserModalProps = {
     isModalOpen: boolean
-    setIsModalOpen: Function
+    setIsModalOpen: Function,
+    id?: number
 }
 
-const NewUser: FC<NewUserProps> = ({isModalOpen, setIsModalOpen}) => {
+const UserModal: FC<UserModalProps> = ({isModalOpen, setIsModalOpen, id}) => {
     const token = useTypedSelector(state => state.auth.token)
     const {error} = useTypedSelector(state => state.users)
-    const {createNewUsers} = useActions()
+    const {createNewUsers, getUser} = useActions()
 
     const [username, setUsername] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [password, setPassword] = useState('');
     const [isActive, setIsActive] = useState(true);
+
+    // user edit not ready
+    // useEffect(() => {
+    //     if (isModalOpen && id !== 0 && typeof(id) === 'number') {
+    //         const fetchUser = async () => {
+    //             const user = await getUser(token, id)
+    //             if (user.has username) setUsername(user.username)
+    //
+    //             firstNam
+    //             lastName
+    //             password
+    //             isActive
+    //             first_name: "Jhon"
+    //             // id: 1125
+    //             is_active: true
+    //             last_name: "Stariggov"
+    //             username: "starig"
+    //         };
+    //
+    //         fetchUser()
+    //             // make sure to catch any error
+    //             .catch(console.error);;
+    //     }
+    // }, [isModalOpen]);
 
     const createHandler = async () => {
         await createNewUsers(token, {
@@ -30,6 +56,10 @@ const NewUser: FC<NewUserProps> = ({isModalOpen, setIsModalOpen}) => {
         })
 
         setIsModalOpen(false)
+    }
+
+    const updateHandler = async () => {
+        console.log('update')
     }
 
     return (
@@ -95,4 +125,4 @@ const NewUser: FC<NewUserProps> = ({isModalOpen, setIsModalOpen}) => {
     );
 };
 
-export default NewUser;
+export default UserModal;

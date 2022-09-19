@@ -10,7 +10,8 @@ export enum UsersActionEnum {
     SET_ERROR = "SET_ERROR",
     SET_IS_LOADING = "SET_IS_LOADING",
     SET_USERS = "SET_USERS",
-    ADD_USER = "ADD_USER"
+    ADD_USER = "ADD_USER",
+    REMOVE_USER = "REMOVE_USER"
 }
 
 export interface SetUsersAction {
@@ -33,8 +34,14 @@ export interface AddUserAction {
     payload: IUser
 }
 
+export interface RemoveUserAction {
+    type:  UsersActionEnum.REMOVE_USER
+    payload: number
+}
+
 export type UsersAction =
     SetErrorAction |
     SetIsLoadingAction |
     SetUsersAction |
-    AddUserAction
+    AddUserAction |
+    RemoveUserAction
