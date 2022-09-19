@@ -1,5 +1,4 @@
-import {FC, useState} from 'react';
-import axios from "axios";
+import {FC} from 'react';
 import {Card, Layout, Row} from "antd";
 import LoginForm from "../components/LoginForm";
 

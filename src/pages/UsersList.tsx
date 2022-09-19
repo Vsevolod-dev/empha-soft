@@ -20,7 +20,7 @@ const UsersList: React.FC = () => {
     }, [])
 
     let filteredUsers = users.filter(user => user.username.toLowerCase().includes(username.toLowerCase()))
-    if (id !== '') filteredUsers = filteredUsers.filter(user => user.id == parseInt(id))
+    if (id !== '') filteredUsers = filteredUsers.filter(user => user.id === parseInt(id))
 
     return (
         <>

@@ -3,8 +3,6 @@ import {Header} from 'antd/lib/layout/layout';
 import React, {FC} from 'react';
 import {useNavigate} from "react-router-dom";
 import {useTypedSelector} from "../hoooks/useTypedSelector";
-import {useDispatch} from "react-redux";
-import {AuthActionCreators} from "../store/reducers/auth/action-creators";
 import {useActions} from "../hoooks/useActions";
 
 const Navbar: FC = () => {
