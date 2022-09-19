@@ -14,7 +14,7 @@ export const AuthActionCreators = {
     login: (username: string, password: string) => async (dispatch: AppDispatch) => {
         try {
             dispatch(AuthActionCreators.setIsLoading(true))
-            const res = await axios.post('http://emphasoft-test-assignment.herokuapp.com/api-token-auth/', {
+            const res = await axios.post('https://emphasoft-test-assignment.herokuapp.com/api-token-auth/', {
                 username,
                 password
             })

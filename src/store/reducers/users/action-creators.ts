@@ -15,7 +15,7 @@ export const UserActionCreators = {
     getUsers: (token: string) => async (dispatch: AppDispatch) => {
         try {
             dispatch(UserActionCreators.setIsLoading(true))
-            const res = await axios.get('http://emphasoft-test-assignment.herokuapp.com/api/v1/users', {
+            const res = await axios.get('https://emphasoft-test-assignment.herokuapp.com/api/v1/users', {
                 headers: {
                     'Authorization': `Token ${token}`
                 }
